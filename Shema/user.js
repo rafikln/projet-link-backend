@@ -24,4 +24,11 @@ const user= new mongoose.Schema(
 
     }
 )
+user.methods.toJSON = function () {
+  const userOBJ = this.toObject();
+  userOBJ.id = userOBJ._id;
+  delete userOBJ._id;
+  delete userOBJ.__v;
+  return userOBJ;
+};
 export default mongoose.model("User",user) 

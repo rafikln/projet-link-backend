@@ -25,4 +25,11 @@ Session.pre("validate", function (next) {
   }
   next();
 });
+Session.methods.toJSON = function () {
+  const sessionOBJ = this.toObject();
+  sessionOBJ.id = sessionOBJ._id;
+  delete sessionOBJ._id;
+  delete sessionOBJ.__v;
+  return sessionOBJ;
+};
 export const SessionModel = mongoose.model("Session", Session);
